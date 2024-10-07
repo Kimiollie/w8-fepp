@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useAuth } from "./useAuth";
 
 export default function useLogin(url) {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false); // Changed to false by default
+    const [setUser] = useAuth();
 
     const login = async (object) => {
         setIsLoading(true);
@@ -22,7 +24,8 @@ export default function useLogin(url) {
             }
 
             // Save user data to localStorage
-            localStorage.setItem("user", JSON.stringify(user));
+            // localStorage.setItem("user", JSON.stringify(user));
+            setUser(user);
 
             setIsLoading(false);
             return user; // Return user data on success
