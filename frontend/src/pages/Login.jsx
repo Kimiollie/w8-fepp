@@ -1,3 +1,4 @@
+import { useAuth } from "../hooks/useAuth";
 import useField from "../hooks/useField";
 import useLogin from "../hooks/useLogin";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  // const { setUser } = useContext(AuthContext);
+  const { setUser } = useAuth(); // Access Auth
   const email = useField("email");
   const password = useField("password");
 
@@ -18,7 +19,7 @@ const Login = () => {
 
       if (userData) {
           console.log("Login successful:", userData);
-          // setUser(userData); // Set user data in context
+          setUser(userData); // Set user data in context
           navigate("/"); // Redirect to home or desired page
       } else {
           console.error("Login failed:", error);

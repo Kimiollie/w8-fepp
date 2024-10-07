@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
+import { useAuth } from "../hooks/useAuth";
 // import AuthContext from "../context/AuthContext";
 
 const AddJobPage = () => {
@@ -9,9 +10,9 @@ const AddJobPage = () => {
   const [companyName, setCompanyName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactPhone, setContactPhone] = useState("");
-  //  const { token } = useContext(AuthContext); // Access Auth
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = user ? user.token : null;
+   const { token } = useAuth(); // Access Auth
+  // const user = JSON.parse(localStorage.getItem("user"));
+  // const token = user ? user.token : null;
 
   const navigate = useNavigate();
 

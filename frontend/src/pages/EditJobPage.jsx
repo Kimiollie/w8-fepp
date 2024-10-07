@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { useAuth } from "../hooks/useAuth";
 // import { useContext } from "react";
 // import AuthContext from "../context/AuthContext";
 
@@ -18,9 +19,9 @@ const EditJobPage = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [contactPhone, setContactPhone] = useState("");
 
-  // const { token, isLoading } = useContext(AuthContext); // Access Auth
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = user ? user.token : null;
+  const { token, isLoading } = useAuth(); // Access Auth
+  // const user = JSON.parse(localStorage.getItem("user"));
+  // const token = user ? user.token : null;
 
   const navigate = useNavigate();
 
@@ -51,16 +52,16 @@ const EditJobPage = () => {
     };
 
     // Only fetch the job if the token is available
-    // if (!isLoading && token) {
+    if (!isLoading && token) {
       fetchJob();
-    // }
-  }, [id, token]);
-// }, [id, token, isLoading]);
+    }
+  // }, [id, token]);
+}, [id, token, isLoading]);
 
   // Check if loading or token is null
-  // if (isLoading) {
-  //   return <LoadingSpinner />;
-  // }
+  if (isLoading) {
+    return <LoadingSpinner />; 
+  }
 
   if (!token) {
     return <div>You are not authorized to edit this job.</div>; // Handle unauthorized access
