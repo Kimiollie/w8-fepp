@@ -4,7 +4,7 @@ import { useAuth } from "./useAuth";
 export default function useLogin(url) {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false); // Changed to false by default
-    const [setUser] = useAuth();
+    const {setUser} = useAuth();
 
     const login = async (object) => {
         setIsLoading(true);
